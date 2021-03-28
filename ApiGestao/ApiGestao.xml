@@ -1,0 +1,329 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ApiGestao</name>
+    </assembly>
+    <members>
+        <member name="T:ApiGestao.Controllers.AgendamentoController">
+            <summary>
+            ControllerAgendamento
+            </summary>
+        </member>
+        <member name="M:ApiGestao.Controllers.AgendamentoController.#ctor(ApiGestao.Data.AppDbContext,ApiGestao.Models.IRepository)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <param name="repo"></param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:ApiGestao.Controllers.AgendamentoController.GetAgendamentos" -->
+        <member name="M:ApiGestao.Controllers.AgendamentoController.GetAgendamento(System.Int32)">
+            <summary>
+            Método responsável por retorna uma unica reserva Cadastrada, através do id informado
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Controllers.AgendamentoController.PostAgendamento(ApiGestao.Models.Agendamento)">
+            <summary>
+            
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Controllers.AgendamentoController.PutAgendamento(System.Int32,ApiGestao.Models.Agendamento)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Controllers.AgendamentoController.DeleteAgendamento(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ApiGestao.Controllers.SalaController">
+            <summary>
+            Controller SalaController
+            </summary>
+        </member>
+        <member name="M:ApiGestao.Controllers.SalaController.#ctor(ApiGestao.Models.IRepository)">
+            <summary>
+            Repositorio
+            </summary>
+            <param name="repo"></param>
+        </member>
+        <member name="M:ApiGestao.Controllers.SalaController.GetSala(ApiGestao.Helpers.PageParams)">
+            <summary>
+            Método responsável por retorna todas as salas Cadastradas
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Controllers.SalaController.GetSala(System.Int32)">
+            <summary>
+            Método responsável por retorna uma unica sala Cadastrada, através do id informado
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Controllers.SalaController.PostSala(ApiGestao.Models.Sala)">
+            <summary>
+             Método responsável por Incluir uma nova sala
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Controllers.SalaController.PutSala(System.Int32,ApiGestao.Models.Sala)">
+            <summary>
+             Método responsável por alterar informações da sala, informando todos os campos que compõem o registro
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <param name="sala"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Controllers.SalaController.PatchSala(System.Int32,ApiGestao.Models.Sala)">
+            <summary>
+             Método responsável por alterar informações da sala, informando somente oque deseja alterar no registro
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <param name="sala"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Controllers.SalaController.DeleteSala(System.Int32)">
+            <summary>
+             Método responsável por deletar o registro
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ApiGestao.Models.IRepository">
+            <summary>
+            Classe Interface d Repository
+            </summary>
+        </member>
+        <member name="M:ApiGestao.Models.IRepository.Add``1(``0)">
+            <summary>
+            Metodo Add para usar nos controller
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entity"></param>
+        </member>
+        <member name="M:ApiGestao.Models.IRepository.Update``1(``0)">
+            <summary>
+            Metodo Add para usar nos controller
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entity"></param>
+        </member>
+        <member name="M:ApiGestao.Models.IRepository.Delete``1(``0)">
+            <summary>
+            Metodo Add para usar nos controller
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entity"></param>
+        </member>
+        <member name="M:ApiGestao.Models.IRepository.SaveChangesAsync">
+            <summary>
+            Metodo Add para usar nos controller
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Models.IRepository.GetAllSalasAsync(ApiGestao.Helpers.PageParams)">
+            <summary>
+            Metodo assincrono para trazer todos os registro de sala
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Models.IRepository.GetAllSalasByNomeAsync(System.String)">
+            <summary>
+            Metodo assincrono para trazer a sala pesquisando através do nome 
+            </summary>
+            <param name="salaNome"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Models.IRepository.GetSalaByIdAsync(System.Int32)">
+            <summary>
+            Metodo assincrono para trazer o registro de sala através do Id
+            </summary>
+            <param name="idSala"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Models.IRepository.GetAllAgendamentosAsync(System.Boolean)">
+            <summary>
+            Metodo assincrono para trazer todos os registro de Agendamento
+            </summary>
+            <param name="includeSala"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Models.IRepository.GetAllAgendamentosByIdSalaAsync(System.Int32,System.Boolean)">
+            <summary>
+            Metodos assincrono para trazer o agendamento  pesquisando através do Id da sala
+            </summary>
+            <param name="idSala"></param>
+            <param name="includeSala"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Models.IRepository.GetAgendamentoByIdAsync(System.Int32,System.Boolean)">
+            <summary>
+            Metodos assincrono para trazer o registro de Agendamento através do Id
+            </summary>
+            <param name="idAgendamento"></param>
+            <param name="includeSala"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Models.IRepository.GetAllSalasDisponiveisAsync">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Models.IRepository.GetAllSalasIndisponiveisAsync">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ApiGestao.Models.Repository">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ApiGestao.Models.Repository.#ctor(ApiGestao.Data.AppDbContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:ApiGestao.Models.Repository.Add``1(``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entity"></param>
+        </member>
+        <member name="M:ApiGestao.Models.Repository.Update``1(``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entity"></param>
+        </member>
+        <member name="M:ApiGestao.Models.Repository.Delete``1(``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entity"></param>
+        </member>
+        <member name="M:ApiGestao.Models.Repository.SaveChangesAsync">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Models.Repository.GetAllSalasAsync(ApiGestao.Helpers.PageParams)">
+            <summary>
+            Metodo assincrono para trazer todos os registro de sala
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Models.Repository.GetAllSalasByNomeAsync(System.String)">
+            <summary>
+            Metodo assincrono para trazer a sala pesquisando através do nome 
+            </summary>
+            <param name="salaNome"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Models.Repository.GetSalaByIdAsync(System.Int32)">
+            <summary>
+            Metodo assincrono para trazer o registro de sala através do Id
+            </summary>
+            <param name="idSala"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Models.Repository.GetAllAgendamentosAsync(System.Boolean)">
+            <summary>
+            Metodo assincrono para trazer todos os registro de Agendamento
+            </summary>
+            <param name="includeSala"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Models.Repository.GetAllAgendamentosByIdSalaAsync(System.Int32,System.Boolean)">
+            <summary>
+            Metodos assincrono para trazer o agendamento  pesquisando através do Id da sala
+            </summary>
+            <param name="idSala"></param>
+            <param name="includeSala"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Models.Repository.GetAgendamentoByIdAsync(System.Int32,System.Boolean)">
+            <summary>
+            Metodos assincrono para trazer o registro de Agendamento através do Id
+            </summary>
+            <param name="idAgendamento"></param>
+            <param name="includeSala"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ApiGestao.Models.Agendamento">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ApiGestao.Models.Agendamento.IDAGENDAMENTO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ApiGestao.Models.Agendamento.TITULO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ApiGestao.Models.Agendamento.DT_INICIO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ApiGestao.Models.Agendamento.DT_FIM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ApiGestao.Models.Agendamento.Sala">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ApiGestao.Models.Agendamento.IDSALA">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ApiGestao.Models.Sala">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ApiGestao.Models.Sala.IDSALA">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ApiGestao.Models.Sala.NOME">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ApiGestao.Helpers.PageParams.PageSize">
+            <summary>
+            Garantindo que o pagesize nunca vai ser maior que o  MaxPageSize
+            </summary>
+        </member>
+    </members>
+</doc>
