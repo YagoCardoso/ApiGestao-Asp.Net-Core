@@ -52,6 +52,8 @@ namespace ApiGestao
 
             });
 
+            services.AddCors();
+
             //    services.AddSwaggerGen(options => {
             //        options.SwaggerDoc(
             //            "ApiGestao",
@@ -84,6 +86,8 @@ namespace ApiGestao
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseAuthorization();
 
