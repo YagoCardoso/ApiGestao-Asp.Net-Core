@@ -42,6 +42,11 @@ namespace ApiGestao.Models
         /// <returns></returns>
         Task<PageList<Sala>> GetAllSalasAsync(PageParams pageParams);
         /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        Task<Sala[]> GetAllSalasAsyncNotPageList();
+        /// <summary>
         /// Metodo assincrono para trazer a sala pesquisando através do nome 
         /// </summary>
         /// <param name="salaNome"></param>
@@ -53,6 +58,7 @@ namespace ApiGestao.Models
         /// <param name="idSala"></param>
         /// <returns></returns>
         Task<Sala> GetSalaByIdAsync(int idSala);
+        Task<Sala> GetNomeSalaByIdAsync(int idSala);
         #endregion
 
         #region Agendamentos

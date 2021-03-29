@@ -76,6 +76,7 @@ namespace ApiGestao.Controllers
         {
             //verificando disponbilidade da sala
             var reservas = await _repo.GetAllAgendamentosByIdSalaAsync(model.IDSALA);
+
             foreach (var item in reservas)
             {
                 if (model.DT_INICIO < item.DT_FIM)
@@ -83,8 +84,7 @@ namespace ApiGestao.Controllers
                     return BadRequest("Sala não disponivel");
                 }
             }
-           
-           try
+            try
             {
                 _repo.Add(model);
 
@@ -98,7 +98,7 @@ namespace ApiGestao.Controllers
                 return BadRequest($"Erro: {ex}");
             }
 
-            return CreatedAtAction("GetAgendamento", new { id = model.IDAGENDAMENTO }, model);
+            return BadRequest("Sala não encontrada");
         }
 
         /// <summary>

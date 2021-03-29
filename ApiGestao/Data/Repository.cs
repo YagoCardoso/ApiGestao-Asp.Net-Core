@@ -75,6 +75,14 @@ namespace ApiGestao.Models
             // return await query.ToListAsync();
             return await PageList<Sala>.CreateAsnc(query, pageParams.PageNumber, pageParams.PageSize);
         }
+        public async Task<Sala[]> GetAllSalasAsyncNotPageList()
+        {
+            IQueryable<Sala> query = _context.Sala;
+            query = query.AsNoTracking().OrderBy(a => a.IDSALA);
+
+            return await query.ToArrayAsync();
+        }
+
         /// <summary>
         /// Metodo assincrono para trazer a sala pesquisando através do nome 
         /// </summary>
@@ -100,6 +108,16 @@ namespace ApiGestao.Models
             query = query.AsNoTracking()
            .OrderBy(a => a.IDSALA)
              .Where(a => a.IDSALA == idSala);
+
+            return await query.FirstOrDefaultAsync();
+        }
+        public async Task<Sala> GetNomeSalaByIdAsync(int idSala)
+        {
+            IQueryable<Sala> query = _context.Sala;
+
+            query = (IQueryable<Sala>)query.AsNoTracking()
+           .OrderBy(a => a.IDSALA)
+             .Where(a => a.IDSALA == idSala).Select(b => b.NOME);
 
             return await query.FirstOrDefaultAsync();
         }
@@ -173,21 +191,35 @@ namespace ApiGestao.Models
 
         public async Task<Agendamento[]> GetAllSalasDisponiveisAsync()
         {
+            //IQueryable<Agendamento> query = _context.Agendamentos;
+            //query = query.AsNoTracking().OrderBy(a => a.IDAGENDAMENTO).Where(a => a.DT_FIM < DateTime.Now);
+            //query = query.Include(pe => pe.Sala)
+            //               .ThenInclude(ad => ad.NOME);
+
+            //return await query.ToArrayAsync();
+
             IQueryable<Agendamento> query = _context.Agendamentos;
-            query = query.Where(a => a.DT_FIM < DateTime.Now);
-            query = query.AsNoTracking().OrderBy(a => a.IDAGENDAMENTO);
+            query = query.AsNoTracking()
+                         .OrderBy(c => c.IDAGENDAMENTO).Where(a => a.DT_FIM < DateTime.Now);
 
             return await query.ToArrayAsync();
         }
         public async Task<Agendamento[]> GetAllSalasIndisponiveisAsync()
         {
+            //IQueryable<Agendamento> query = _context.Agendamentos;
+            //query = query.AsNoTracking().OrderBy(a => a.IDAGENDAMENTO).Where(a => a.DT_FIM > DateTime.Now);
+            //query = query.Include(pe => pe.Sala)
+            //                .ThenInclude(ad => ad.NOME);
+
+            //return await query.ToArrayAsync();
             IQueryable<Agendamento> query = _context.Agendamentos;
-            query = query.Where(a => a.DT_FIM > DateTime.Now);
-            query = query.AsNoTracking().OrderBy(a => a.IDAGENDAMENTO);
+            query = query.AsNoTracking()
+                         .OrderBy(c => c.IDAGENDAMENTO).Where(a => a.DT_FIM > DateTime.Now);
 
             return await query.ToArrayAsync();
         }
 
+   
         #endregion
 
 

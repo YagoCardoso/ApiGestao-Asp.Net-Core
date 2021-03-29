@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using ApiGestao.Data;
 using ApiGestao.Models;
 using ApiGestao.Helpers;
+using X.PagedList;
+using System.Text.Json;
 
 namespace ApiGestao.Controllers
 {
@@ -15,6 +17,8 @@ namespace ApiGestao.Controllers
     /// <summary>
     /// Controller SalaController
     /// </summary>
+    /// 
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class SalaController : ControllerBase
@@ -37,10 +41,13 @@ namespace ApiGestao.Controllers
         /// <returns></returns>
         // GET: api/Sala
         [HttpGet]
-        public async Task<IActionResult> GetSala([FromQuery]PageParams pageParams)
+        // public async Task<IActionResult> GetSala([FromQuery]PageParams pageParams)
+        public async Task<IActionResult> GetSala()
         {
-            var result = await _repo.GetAllSalasAsync(pageParams);
-            Response.AddPagination(result.CurrentPage, result.PageSize, result.TotalCounts, result.TotalPages);
+            var result = await _repo.GetAllSalasAsyncNotPageList();
+
+            //  var result = await _repo.GetAllSalasAsync(pageParams);
+            // Response.AddPagination(result.CurrentPage, result.PageSize, result.TotalCounts, result.TotalPages);
 
             return Ok(result);
         }
@@ -59,7 +66,6 @@ namespace ApiGestao.Controllers
             return Ok(sala);
 
         }
-
 
         /// <summary>
         ///  Método responsável por Incluir uma nova sala
@@ -85,10 +91,6 @@ namespace ApiGestao.Controllers
             }
 
             return BadRequest("Sala não encontrada");
-
-            //_context.Sala.Add(sala);
-            //await _context.SaveChangesAsync();
-            //return CreatedAtAction("GetSala", new { id = sala.IDSALA }, sala);
         }
 
 
@@ -183,6 +185,64 @@ namespace ApiGestao.Controllers
         }
 
         #endregion
+
+        /// <summary>
+        /// Retornar salas disponiveis
+        /// </summary>
+        /// <returns></returns>
+        // GET: api/Sala/
+        [HttpGet("GetSalasDisponiveis")]
+        public async Task<IActionResult>  GetSalasDisponiveis()
+        {
+            var salasDisponiveis = await _repo.GetAllSalasIndisponiveisAsync();
+            var listNomesSalas = new List<string>();
+
+            foreach (var item in salasDisponiveis)
+            {
+                var nomes = await _repo.GetSalaByIdAsync(item.IDSALA);
+                listNomesSalas.Add(nomes.NOME);
+
+            }
+
+            var result = new
+            {
+                nome = listNomesSalas,
+                idsala = salasDisponiveis
+            };
+
+            return new JsonResult(result);
+        }
+
+        /// <summary>
+        /// Retorna salas indisponiveis
+        /// </summary>
+        /// <returns></returns>
+        // GET: api/Sala/
+
+        [HttpGet("GetSalasIndisponiveis")]
+        public async Task<IActionResult> GetSalasIndisponiveis()
+        {
+            var salasIndisponiveis = await _repo.GetAllSalasIndisponiveisAsync();
+
+            var listNomesSalas = new List<string>();
+
+            foreach (var item in salasIndisponiveis)
+            {
+                var nomes = await _repo.GetSalaByIdAsync(item.IDSALA);
+                listNomesSalas.Add(nomes.NOME);
+               
+            }
+
+            var result = new
+            {
+                nome = listNomesSalas,
+                idsala = salasIndisponiveis
+            };
+
+            return new JsonResult(result);
+        }
+
+      
 
     }
 }

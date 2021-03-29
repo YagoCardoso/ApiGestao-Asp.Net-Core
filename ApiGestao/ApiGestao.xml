@@ -16,7 +16,12 @@
             <param name="context"></param>
             <param name="repo"></param>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:ApiGestao.Controllers.AgendamentoController.GetAgendamentos" -->
+        <member name="M:ApiGestao.Controllers.AgendamentoController.GetAgendamentos">
+            <summary>
+             Método responsável por retorna todas as reservas agendadas
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:ApiGestao.Controllers.AgendamentoController.GetAgendamento(System.Int32)">
             <summary>
             Método responsável por retorna uma unica reserva Cadastrada, através do id informado
@@ -50,6 +55,7 @@
             <summary>
             Controller SalaController
             </summary>
+            
         </member>
         <member name="M:ApiGestao.Controllers.SalaController.#ctor(ApiGestao.Models.IRepository)">
             <summary>
@@ -57,7 +63,7 @@
             </summary>
             <param name="repo"></param>
         </member>
-        <member name="M:ApiGestao.Controllers.SalaController.GetSala(ApiGestao.Helpers.PageParams)">
+        <member name="M:ApiGestao.Controllers.SalaController.GetSala">
             <summary>
             Método responsável por retorna todas as salas Cadastradas
             </summary>
@@ -83,7 +89,6 @@
             </summary>
             <param name="id"></param>
             <param name="model"></param>
-            <param name="sala"></param>
             <returns></returns>
         </member>
         <member name="M:ApiGestao.Controllers.SalaController.PatchSala(System.Int32,ApiGestao.Models.Sala)">
@@ -92,7 +97,6 @@
             </summary>
             <param name="id"></param>
             <param name="model"></param>
-            <param name="sala"></param>
             <returns></returns>
         </member>
         <member name="M:ApiGestao.Controllers.SalaController.DeleteSala(System.Int32)">
@@ -100,6 +104,18 @@
              Método responsável por deletar o registro
             </summary>
             <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Controllers.SalaController.GetSalasDisponiveis">
+            <summary>
+            Retornar salas disponiveis
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Controllers.SalaController.GetSalasIndisponiveis">
+            <summary>
+            Retorna salas indisponiveis
+            </summary>
             <returns></returns>
         </member>
         <member name="T:ApiGestao.Models.IRepository">
@@ -137,6 +153,12 @@
         <member name="M:ApiGestao.Models.IRepository.GetAllSalasAsync(ApiGestao.Helpers.PageParams)">
             <summary>
             Metodo assincrono para trazer todos os registro de sala
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Models.IRepository.GetAllSalasAsyncNotPageList">
+            <summary>
+            
             </summary>
             <returns></returns>
         </member>
@@ -279,6 +301,7 @@
             <summary>
             
             </summary>
+            
         </member>
         <member name="P:ApiGestao.Models.Agendamento.TITULO">
             <summary>
@@ -314,6 +337,7 @@
             <summary>
             
             </summary>
+            
         </member>
         <member name="P:ApiGestao.Models.Sala.NOME">
             <summary>
