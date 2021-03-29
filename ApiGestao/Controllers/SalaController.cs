@@ -48,10 +48,7 @@ namespace ApiGestao.Controllers
 
             try
             {
-                var result = await _repo.GetAllSalasAsyncNotPageList();
-                result.Skip(offset)
-                       .Take(limit)
-                       .ToList(); 
+                var result = await _repo.GetAllSalasAsync(null, 0, 1);
 
                 return Ok(result);
             }

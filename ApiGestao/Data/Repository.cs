@@ -66,14 +66,17 @@ namespace ApiGestao.Models
         /// Metodo assincrono para trazer todos os registro de sala
         /// </summary>
         /// <returns></returns>
-        public async Task<PageList<Sala>> GetAllSalasAsync(PageParams pageParams)
+        public async Task<List<Sala>> GetAllSalasAsync(PageParams pageParams, int offset = 0, int limit = 1)
         {
             IQueryable<Sala> query = _context.Sala;
 
             query = query.AsNoTracking().OrderBy(a => a.IDSALA);
+            query.Skip(offset)
+                       .Take(limit)
+                       ;
 
-            // return await query.ToListAsync();
-            return await PageList<Sala>.CreateAsnc(query, pageParams.PageNumber, pageParams.PageSize);
+             return await query.ToListAsync();
+            //return await PageList<Sala>.CreateAsnc(query, pageParams.PageNumber, pageParams.PageSize);
         }
         public async Task<Sala[]> GetAllSalasAsyncNotPageList()
         {

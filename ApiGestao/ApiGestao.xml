@@ -150,7 +150,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ApiGestao.Models.IRepository.GetAllSalasAsync(ApiGestao.Helpers.PageParams)">
+        <member name="M:ApiGestao.Models.IRepository.GetAllSalasAsync(ApiGestao.Helpers.PageParams,System.Int32,System.Int32)">
             <summary>
             Metodo assincrono para trazer todos os registro de sala
             </summary>
@@ -249,7 +249,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ApiGestao.Models.Repository.GetAllSalasAsync(ApiGestao.Helpers.PageParams)">
+        <member name="M:ApiGestao.Models.Repository.GetAllSalasAsync(ApiGestao.Helpers.PageParams,System.Int32,System.Int32)">
             <summary>
             Metodo assincrono para trazer todos os registro de sala
             </summary>

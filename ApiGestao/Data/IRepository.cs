@@ -40,7 +40,7 @@ namespace ApiGestao.Models
         /// Metodo assincrono para trazer todos os registro de sala
         /// </summary>
         /// <returns></returns>
-        Task<PageList<Sala>> GetAllSalasAsync(PageParams pageParams);
+        Task<List<Sala>> GetAllSalasAsync(PageParams pageParams, int offset = 0, int limit = 1);
         /// <summary>
         /// 
         /// </summary>
