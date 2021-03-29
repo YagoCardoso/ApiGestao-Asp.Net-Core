@@ -71,9 +71,7 @@ namespace ApiGestao.Models
             IQueryable<Sala> query = _context.Sala;
 
             query = query.AsNoTracking().OrderBy(a => a.IDSALA);
-            query.Skip(offset)
-                       .Take(limit)
-                       ;
+            query.Skip(offset).Take(limit);
 
              return await query.ToListAsync();
             //return await PageList<Sala>.CreateAsnc(query, pageParams.PageNumber, pageParams.PageSize);
