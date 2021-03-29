@@ -189,37 +189,32 @@ namespace ApiGestao.Models
             return await query.FirstOrDefaultAsync();
         }
 
-        public async Task<Agendamento[]> GetAllSalasDisponiveisAsync()
+        public async Task<IEnumerable<dynamic>> GetAllSalasIndisponiveisAsync()
         {
-            //IQueryable<Agendamento> query = _context.Agendamentos;
-            //query = query.AsNoTracking().OrderBy(a => a.IDAGENDAMENTO).Where(a => a.DT_FIM < DateTime.Now);
-            //query = query.Include(pe => pe.Sala)
-            //               .ThenInclude(ad => ad.NOME);
+            var query = from agendamento in _context.Set<Agendamento>()
+                        join sala in _context.Set<Sala>()
+                            on agendamento.IDSALA equals sala.IDSALA
+                        select new { sala, agendamento };
+            return await query
+                .Where(a => a.agendamento.DT_FIM > DateTime.Now
+                ).OrderBy(a => a.agendamento.IDAGENDAMENTO)
+                .ToArrayAsync();
 
-            //return await query.ToArrayAsync();
-
-            IQueryable<Agendamento> query = _context.Agendamentos;
-            query = query.AsNoTracking()
-                         .OrderBy(c => c.IDAGENDAMENTO).Where(a => a.DT_FIM < DateTime.Now);
-
-            return await query.ToArrayAsync();
         }
-        public async Task<Agendamento[]> GetAllSalasIndisponiveisAsync()
+        public async Task<IEnumerable<dynamic>> GetAllSalasDisponiveisAsync()
         {
-            //IQueryable<Agendamento> query = _context.Agendamentos;
-            //query = query.AsNoTracking().OrderBy(a => a.IDAGENDAMENTO).Where(a => a.DT_FIM > DateTime.Now);
-            //query = query.Include(pe => pe.Sala)
-            //                .ThenInclude(ad => ad.NOME);
+            var query = from agendamento in _context.Set<Agendamento>()
+                        join sala in _context.Set<Sala>()
+                            on agendamento.IDSALA equals sala.IDSALA
+                        select new { sala, agendamento };
+            return await query
+                .Where(a => a.agendamento.DT_FIM > DateTime.Now
+                ).OrderBy(a => a.agendamento.IDAGENDAMENTO)
+                .ToArrayAsync();
 
-            //return await query.ToArrayAsync();
-            IQueryable<Agendamento> query = _context.Agendamentos;
-            query = query.AsNoTracking()
-                         .OrderBy(c => c.IDAGENDAMENTO).Where(a => a.DT_FIM > DateTime.Now);
-
-            return await query.ToArrayAsync();
         }
 
-   
+
         #endregion
 
 

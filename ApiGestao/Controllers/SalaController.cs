@@ -44,12 +44,21 @@ namespace ApiGestao.Controllers
         // public async Task<IActionResult> GetSala([FromQuery]PageParams pageParams)
         public async Task<IActionResult> GetSala()
         {
-            var result = await _repo.GetAllSalasAsyncNotPageList();
-
             //  var result = await _repo.GetAllSalasAsync(pageParams);
+
             // Response.AddPagination(result.CurrentPage, result.PageSize, result.TotalCounts, result.TotalPages);
 
-            return Ok(result);
+            try
+            {
+                var result = await _repo.GetAllSalasAsyncNotPageList();
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro: {ex.Message}");
+            }
+
         }
 
         /// <summary>
@@ -61,9 +70,17 @@ namespace ApiGestao.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Sala>> GetSala(int id)
         {
-            var sala = await _repo.GetSalaByIdAsync(id);
-            if (sala == null) return BadRequest("Sala não encontrada");
-            return Ok(sala);
+          
+            try
+            {
+                var result = await _repo.GetSalaByIdAsync(id);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro: {ex.Message}");
+            }
 
         }
 
@@ -192,25 +209,10 @@ namespace ApiGestao.Controllers
         /// <returns></returns>
         // GET: api/Sala/
         [HttpGet("GetSalasDisponiveis")]
-        public async Task<IActionResult>  GetSalasDisponiveis()
+        public async Task<IActionResult> GetSalasDisponiveis()
         {
-            var salasDisponiveis = await _repo.GetAllSalasIndisponiveisAsync();
-            var listNomesSalas = new List<string>();
-
-            foreach (var item in salasDisponiveis)
-            {
-                var nomes = await _repo.GetSalaByIdAsync(item.IDSALA);
-                listNomesSalas.Add(nomes.NOME);
-
-            }
-
-            var result = new
-            {
-                nome = listNomesSalas,
-                idsala = salasDisponiveis
-            };
-
-            return new JsonResult(result);
+            var salasDisponiveis = await _repo.GetAllSalasDisponiveisAsync();
+            return Ok(salasDisponiveis);
         }
 
         /// <summary>
@@ -223,26 +225,11 @@ namespace ApiGestao.Controllers
         public async Task<IActionResult> GetSalasIndisponiveis()
         {
             var salasIndisponiveis = await _repo.GetAllSalasIndisponiveisAsync();
+            return Ok(salasIndisponiveis);
 
-            var listNomesSalas = new List<string>();
-
-            foreach (var item in salasIndisponiveis)
-            {
-                var nomes = await _repo.GetSalaByIdAsync(item.IDSALA);
-                listNomesSalas.Add(nomes.NOME);
-               
-            }
-
-            var result = new
-            {
-                nome = listNomesSalas,
-                idsala = salasIndisponiveis
-            };
-
-            return new JsonResult(result);
         }
 
-      
+
 
     }
 }

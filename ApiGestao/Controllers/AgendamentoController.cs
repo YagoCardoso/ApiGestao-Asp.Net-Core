@@ -43,12 +43,16 @@ namespace ApiGestao.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Agendamento>>> GetAgendamentos()
         {
-            //return await _context.Agendamentos.Where(a => a.DT_FIM < DateTime.Now).ToListAsync();
-            var result = await _repo.GetAllAgendamentosAsync(false);
-            return Ok(result);
+            try
+            {
+                var result = await _repo.GetAllAgendamentosAsync(false);
 
-            //var ocupadas = await _context.Agendamentos.Where(a => a.DT_FIM > DateTime.Now).Select(b => b.Sala.NOME).ToListAsync();
-            //var disponiveis = await _context.Agendamentos.Where(a => a.DT_FIM < DateTime.Now).Select(b => b.Sala.NOME).ToListAsync();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -60,10 +64,19 @@ namespace ApiGestao.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Agendamento>> GetAgendamento(int id)
         {
-            var agendamento = await _repo.GetAgendamentoByIdAsync(id);
-            if (agendamento == null) return BadRequest("Não encontrado");
-            return Ok(agendamento);
+            try
+            {
+                var result = await _repo.GetAgendamentoByIdAsync(id);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro: {ex.Message}");
+            }
+
         }
+
 
         /// <summary>
         /// 
@@ -160,30 +173,6 @@ namespace ApiGestao.Controllers
         }
 
         #endregion
-
-        #region Validações
-
-        private async Task<bool> ValidarAgendamentoAsync(Agendamento agendamento)
-        {
-            var reserbaNoBanco = await _context.Agendamentos.FindAsync(agendamento.IDSALA);
-            var getsala = await _context.Sala.FindAsync(agendamento.IDSALA);
-
-            //if (agendamento.DT_FIM > agendamento.DT_INICIO)
-            //{
-            //    //nao pode fazer uma reserva pra uma data menor doque  a hora inicial
-            //}
-
-            if (agendamento.DT_INICIO < reserbaNoBanco.DT_FIM)
-            {
-                return false;
-            }
-
-
-
-            return true;
-        }
-        #endregion
-
 
     }
 }

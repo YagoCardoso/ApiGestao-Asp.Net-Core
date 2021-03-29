@@ -86,12 +86,12 @@ namespace ApiGestao.Models
         /// 
         /// </summary>
         /// <returns></returns>
-        Task<Agendamento[]> GetAllSalasDisponiveisAsync();
+        Task<IEnumerable<dynamic>> GetAllSalasDisponiveisAsync();
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        Task<Agendamento[]> GetAllSalasIndisponiveisAsync();
+        Task<IEnumerable<dynamic>> GetAllSalasIndisponiveisAsync();
         #endregion
 
     }
