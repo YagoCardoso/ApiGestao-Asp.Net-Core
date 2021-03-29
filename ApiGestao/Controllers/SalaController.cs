@@ -42,15 +42,16 @@ namespace ApiGestao.Controllers
         // GET: api/Sala
         [HttpGet]
         // public async Task<IActionResult> GetSala([FromQuery]PageParams pageParams)
-        public async Task<IActionResult> GetSala()
+         public async Task<IActionResult> GetSala(int offset = 0, int limit = 1)
         {
             //  var result = await _repo.GetAllSalasAsync(pageParams);
-
-            // Response.AddPagination(result.CurrentPage, result.PageSize, result.TotalCounts, result.TotalPages);
 
             try
             {
                 var result = await _repo.GetAllSalasAsyncNotPageList();
+                result.Skip(offset)
+                       .Take(limit)
+                       .ToList(); 
 
                 return Ok(result);
             }
@@ -60,6 +61,7 @@ namespace ApiGestao.Controllers
             }
 
         }
+
 
         /// <summary>
         /// Método responsável por retorna uma unica sala Cadastrada, através do id informado

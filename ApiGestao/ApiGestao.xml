@@ -63,7 +63,7 @@
             </summary>
             <param name="repo"></param>
         </member>
-        <member name="M:ApiGestao.Controllers.SalaController.GetSala">
+        <member name="M:ApiGestao.Controllers.SalaController.GetSala(System.Int32,System.Int32)">
             <summary>
             Método responsável por retorna todas as salas Cadastradas
             </summary>

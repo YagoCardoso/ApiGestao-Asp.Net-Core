@@ -208,7 +208,7 @@ namespace ApiGestao.Models
                             on agendamento.IDSALA equals sala.IDSALA
                         select new { sala, agendamento };
             return await query
-                .Where(a => a.agendamento.DT_FIM > DateTime.Now
+                .Where(a => a.agendamento.DT_FIM < DateTime.Now
                 ).OrderBy(a => a.agendamento.IDAGENDAMENTO)
                 .ToArrayAsync();
 
