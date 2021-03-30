@@ -59,6 +59,8 @@ namespace ApiGestao.Models
         /// <returns></returns>
         Task<Sala> GetSalaByIdAsync(int idSala);
         Task<Sala> GetNomeSalaByIdAsync(int idSala);
+
+        Task<dynamic> VerifySalasByIdAsync(int idSala);
         #endregion
 
         #region Agendamentos

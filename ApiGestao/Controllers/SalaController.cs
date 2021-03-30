@@ -92,6 +92,19 @@ namespace ApiGestao.Controllers
         [HttpPost]
         public async Task<ActionResult<Sala>> PostSala(Sala model)
         {
+
+            #region Details
+            var countSala = await _repo.VerifySalasByIdAsync(model.IDSALA);
+            if (countSala > 0)
+            {
+                return BadRequest($"Sala: {model.IDSALA} Ja esta cadastrada");
+            }
+            if (string.IsNullOrEmpty(model.NOME))
+            {
+                model.NOME = ("Não Informado");
+            }
+            #endregion
+
             try
             {
                 _repo.Add(model);
@@ -225,6 +238,22 @@ namespace ApiGestao.Controllers
         {
             var salasIndisponiveis = await _repo.GetAllSalasIndisponiveisAsync();
             return Ok(salasIndisponiveis);
+
+        }
+
+        private async Task<bool> ValidarCadSala(int idSala)
+        {
+            var salaExists = await _repo.GetAllSalasAsync(null);
+            bool valido = true;
+
+            foreach (var item in salaExists)
+            {
+                if (item.IDSALA == idSala)
+                    valido = false;
+
+            }
+
+            return valido;
 
         }
 

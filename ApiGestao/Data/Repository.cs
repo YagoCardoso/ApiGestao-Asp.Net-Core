@@ -51,6 +51,7 @@ namespace ApiGestao.Models
         {
             _context.Remove(entity);
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -63,9 +64,10 @@ namespace ApiGestao.Models
 
         #region Sala
         /// <summary>
-        /// Metodo assincrono para trazer todos os registro de sala
+        /// Metodo assincrono para trazer todos os registro de sala Pginado
         /// </summary>
         /// <returns></returns>
+        
         public async Task<List<Sala>> GetAllSalasAsync(PageParams pageParams, int offset = 0, int limit = 1)
         {
             IQueryable<Sala> query = _context.Sala;
@@ -76,6 +78,10 @@ namespace ApiGestao.Models
              return await query.ToListAsync();
             //return await PageList<Sala>.CreateAsnc(query, pageParams.PageNumber, pageParams.PageSize);
         }
+        /// <summary>
+        /// Metodo assincrono para trazer todos os registro de sala Não Pagina
+        /// </summary>
+        /// <returns></returns>
         public async Task<Sala[]> GetAllSalasAsyncNotPageList()
         {
             IQueryable<Sala> query = _context.Sala;
@@ -121,6 +127,22 @@ namespace ApiGestao.Models
              .Where(a => a.IDSALA == idSala).Select(b => b.NOME);
 
             return await query.FirstOrDefaultAsync();
+        }
+
+        /// <summary>
+        /// Verificar se a sala ja existe no banco
+        /// </summary>
+        /// <param name="idSala"></param>
+        /// <returns></returns>
+        public async Task<dynamic> VerifySalasByIdAsync(int idSala)
+        {
+            IQueryable<Sala> query = _context.Sala;
+
+            query = query.AsNoTracking()
+           .OrderBy(a => a.IDSALA)
+             .Where(a => a.IDSALA == idSala);
+
+            return await query.CountAsync();
         }
 
         #endregion
