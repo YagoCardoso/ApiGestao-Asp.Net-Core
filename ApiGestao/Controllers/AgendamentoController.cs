@@ -31,7 +31,6 @@ namespace ApiGestao.Controllers
         public AgendamentoController(AppDbContext context, IRepository repo)
         {
              _repo = repo;
-            _context = context;
         }
 
 
