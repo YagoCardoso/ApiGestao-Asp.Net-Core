@@ -216,6 +216,7 @@ namespace ApiGestao.Controllers
 
         #endregion
 
+        #region Details
         /// <summary>
         /// Retornar salas disponiveis
         /// </summary>
@@ -242,21 +243,9 @@ namespace ApiGestao.Controllers
 
         }
 
-        private async Task<bool> ValidarCadSala(int idSala)
-        {
-            var salaExists = await _repo.GetAllSalasAsync(null);
-            bool valido = true;
+        #endregion
 
-            foreach (var item in salaExists)
-            {
-                if (item.IDSALA == idSala)
-                    valido = false;
 
-            }
-
-            return valido;
-
-        }
 
 
 

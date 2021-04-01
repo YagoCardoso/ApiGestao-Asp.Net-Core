@@ -123,7 +123,21 @@ namespace ApiGestao.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAgendamento(int id, Agendamento model)
         {
-                try
+            //verificando disponbilidade da sala
+            //verificando disponbilidade da sala
+            if (string.IsNullOrEmpty(model.IDSALA.ToString()))
+            {
+                var reservas = await _repo.GetAllAgendamentosByIdSalaAsync(model.IDSALA);
+
+                foreach (var item in reservas)
+                {
+                    if (model.DT_INICIO < item.DT_FIM)
+                    {
+                        return BadRequest("Sala não disponivel");
+                    }
+                }
+            }
+            try
                 {
                     var agendamento = await _repo.GetAgendamentoByIdAsync(id);
                     if (agendamento != null)
@@ -149,10 +163,23 @@ namespace ApiGestao.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPatch("{id}")]
-        public async Task<IActionResult> PathAgendamento(int id, Agendamento model)
+        public async Task<IActionResult> PatchAgendamento(int id, Agendamento model)
         {
-            if (id != model.IDAGENDAMENTO)
-                try
+            //verificando disponbilidade da sala
+            if (string.IsNullOrEmpty(model.IDSALA.ToString()))
+            {
+                var reservas = await _repo.GetAllAgendamentosByIdSalaAsync(model.IDSALA);
+
+                foreach (var item in reservas)
+                {
+                    if (model.DT_INICIO < item.DT_FIM)
+                    {
+                        return BadRequest("Sala não disponivel");
+                    }
+                }
+            }
+           
+            try
                 {
                     var agendamento = await _repo.GetAgendamentoByIdAsync(id);
                     if (agendamento != null)

@@ -44,6 +44,14 @@
             <param name="model"></param>
             <returns></returns>
         </member>
+        <member name="M:ApiGestao.Controllers.AgendamentoController.PatchAgendamento(System.Int32,ApiGestao.Models.Agendamento)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
         <member name="M:ApiGestao.Controllers.AgendamentoController.DeleteAgendamento(System.Int32)">
             <summary>
             
@@ -251,7 +259,13 @@
         </member>
         <member name="M:ApiGestao.Models.Repository.GetAllSalasAsync(ApiGestao.Helpers.PageParams,System.Int32,System.Int32)">
             <summary>
-            Metodo assincrono para trazer todos os registro de sala
+            Metodo assincrono para trazer todos os registro de sala Pginado
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Models.Repository.GetAllSalasAsyncNotPageList">
+            <summary>
+            Metodo assincrono para trazer todos os registro de sala Não Pagina
             </summary>
             <returns></returns>
         </member>
@@ -265,6 +279,13 @@
         <member name="M:ApiGestao.Models.Repository.GetSalaByIdAsync(System.Int32)">
             <summary>
             Metodo assincrono para trazer o registro de sala através do Id
+            </summary>
+            <param name="idSala"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiGestao.Models.Repository.VerifySalasByIdAsync(System.Int32)">
+            <summary>
+            Verificar se a sala ja existe no banco
             </summary>
             <param name="idSala"></param>
             <returns></returns>
