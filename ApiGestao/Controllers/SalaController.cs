@@ -138,6 +138,7 @@ namespace ApiGestao.Controllers
                 var sala = await _repo.GetSalaByIdAsync(id);
                 if (sala != null)
                 {
+                    model.NOME =  string.IsNullOrEmpty(sala.NOME) ? model.NOME = "Nao Informado" : model.NOME;
                     _repo.Update(model);
 
                     if (await _repo.SaveChangesAsync())

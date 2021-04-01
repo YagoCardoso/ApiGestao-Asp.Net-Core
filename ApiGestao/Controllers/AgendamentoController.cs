@@ -123,6 +123,34 @@ namespace ApiGestao.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAgendamento(int id, Agendamento model)
         {
+                try
+                {
+                    var agendamento = await _repo.GetAgendamentoByIdAsync(id);
+                    if (agendamento != null)
+                    {
+                        _repo.Update(model);
+
+                        if (await _repo.SaveChangesAsync())
+                            return Ok(model);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"Erro: {ex}");
+                }
+
+            return BadRequest("Não encontrado");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> PathAgendamento(int id, Agendamento model)
+        {
             if (id != model.IDAGENDAMENTO)
                 try
                 {
