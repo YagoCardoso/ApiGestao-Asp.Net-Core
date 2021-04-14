@@ -20,3 +20,20 @@ Build succeeded.
 Done.
 
 Feito isso o projeto API  já esta pronto para ser executado.
+
+***
+Ferramentas e Sugestões
+
+HTTP, REST, JSON e MVC
+
+Projeto .NET Core
+
+EF Core
+
+Repositório
+
+DTO e AutoMapper
+
+Swagger
+
+- Irei consumir essa API com React.js e Next.js
